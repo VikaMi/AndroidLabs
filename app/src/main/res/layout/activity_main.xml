@@ -31,7 +31,9 @@
                 android:layout_weight="1"
                 android:text="Clear"
                 tools:layout_editor_absoluteX="280dp"
-                tools:layout_editor_absoluteY="28dp" />
+                tools:layout_editor_absoluteY="28dp"
+                android:state_pressed="true"
+                android:state_selected="true"/>
         </TableRow>
 
         <Button
@@ -41,7 +43,9 @@
             android:layout_height="wrap_content"
             android:text="Say Hello!"
             tools:layout_editor_absoluteX="280dp"
-            tools:layout_editor_absoluteY="28dp"/>
+            tools:layout_editor_absoluteY="28dp"
+            android:state_pressed="true"
+            android:state_selected="true"/>
 
 
         <TableRow
