@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">MyApp</string>
     <string name="say_hello">Hello, %1$s</string>
+    <string name="submit">Submit</string>
+    <string name="value">First Name</string>
+    <string name="value2">Last Name</string>
+    <string name="value3">Phone</string>
+    <string name="value4">Email</string>
+    <string name="value5">Phone</string>
+    <string name="value6">Password</string>
+    <string name="value7">Password confirm</string>
 
 </resources>

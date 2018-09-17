@@ -9,17 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.nio.Buffer;
 import java.util.regex.Pattern;
-
-import static android.opengl.ETC1.isValid;
-
 
 public class MainActivity extends AppCompatActivity {
 
-
-    EditText firstName, lastName, email, yourPhone, password, confirmPasssword;
+    private EditText firstName, lastName, email, yourPhone, password, confirmPasssword;
     Pattern pFirstName, pLastName, pEmail, pYourPhone, pPassword, pConfirmPassword;
     private Boolean name, surname, bEmail, bPhone, bPassword, bConfirmPassword;
     Button submitButton;
@@ -32,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         initButtons();
         validation();
         onButtonsClick();
-
     }
 
     public void initButtons() {
@@ -46,44 +39,41 @@ public class MainActivity extends AppCompatActivity {
         errorsList = findViewById(R.id.textView);
     }
 
-    private boolean validate_field_to_save(EditText et_field, Pattern regex) {
-        return et_field.getText().toString().matches(String.valueOf(regex));
+    private boolean validateFieldToSave(EditText field, Pattern regex) {
+        return field.getText().toString().matches(String.valueOf(regex));
     }
 
     private void validation() {
         pFirstName = Pattern.compile("[A-Z][a-z ,.'-]+$");
+        pLastName = Pattern.compile("[A-Z][a-z ,.'-]+$");
         pEmail = Pattern.compile("^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$");
-        pYourPhone = Pattern.compile("\\(?([0-9]{3})\\)?([ .-]?)([0-9]{3})\\2([0-9]{4})");
+        pYourPhone = Pattern.compile("[0-9]{10,12}$");
         pPassword = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{7,}$");
+        pConfirmPassword = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{7,}$");
 
-
-        validate_field(firstName, pFirstName);
-        validate_field(lastName, pLastName);
-        validate_field(email, pEmail);
-        validate_field(yourPhone, pYourPhone);
-        validate_field(password, pPassword);
-        validate_field(confirmPasssword, pConfirmPassword);
+        validateField(firstName, pFirstName);
+        validateField(lastName, pLastName);
+        validateField(email, pEmail);
+        validateField(yourPhone, pYourPhone);
+        validateField(password, pPassword);
+        validateField(confirmPasssword, pConfirmPassword);
     }
 
 
-    private void validate_field(final EditText et_field, final Pattern pattern) {
-        et_field.addTextChangedListener(new TextWatcher() {
-
-            private CharSequence mText;
-
+    private void validateField(final EditText field, final Pattern pattern) {
+        field.addTextChangedListener(new TextWatcher() {
             private boolean isValid(CharSequence s) {
                 return pattern.matcher(s).matches();
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (isValid(s)) {
-                    et_field.setBackgroundResource(R.drawable.norm);
+                    field.setBackgroundResource(R.drawable.norm);
+                } else field.setBackgroundResource(R.drawable.error);
 
-                } else et_field.setBackgroundResource(R.drawable.error);
-
-                if (!password.getText().toString().equals(confirmPasssword.getText().toString()) || confirmPasssword.getText().toString().equals("")) {
+                if (!password.getText().toString().equals(confirmPasssword.getText().toString()) ||
+                        confirmPasssword.getText().toString().equals("")) {
                     confirmPasssword.setBackgroundResource(R.drawable.error);
                     password.setBackgroundResource(R.drawable.error);
                 } else {
@@ -99,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
     }
@@ -112,21 +101,22 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        name = validate_field_to_save(firstName, pFirstName);
-                        surname = validate_field_to_save(lastName, pLastName);
-                        bEmail = validate_field_to_save(email, pEmail);
-                        bPassword = validate_field_to_save(password, pPassword);
-                        bConfirmPassword = validate_field_to_save(confirmPasssword, pConfirmPassword);
-                        bPhone= validate_field_to_save(yourPhone, pYourPhone);
-                        if (name&&surname&&bEmail&&bPassword&&bConfirmPassword&&bPhone) {
-                            Toast.makeText(getApplicationContext(), "Save", Toast.LENGTH_LONG).show();
+                        name = validateFieldToSave(firstName, pFirstName);
+                        surname = validateFieldToSave(lastName, pLastName);
+                        bEmail = validateFieldToSave(email, pEmail);
+                        bPassword = validateFieldToSave(password, pPassword);
+                        bConfirmPassword = validateFieldToSave(confirmPasssword, pConfirmPassword);
+                        bPhone= validateFieldToSave(yourPhone, pYourPhone);
+                        if (name&&surname&&bEmail&&bPhone) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Save", Toast.LENGTH_LONG).show();
                         } else
-                            Toast.makeText(getApplicationContext(), "Please fill out the correct fields", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),
+                                    "Please fill out the correct fields",
+                                    Toast.LENGTH_LONG).show();
                         errorsList.setText(getString(R.string.say_hello, firstName.getText().
                                 toString().trim()));
                     }
-
                 });
-
     }
 }
