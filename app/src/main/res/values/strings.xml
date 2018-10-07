@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">MyApp</string>
     <string name="say_hello">Hello, %1$s</string>
+    <string name="submit">Submit</string>
+    <string name="your_name">Your Name</string>
+    <string name="clear">Clear</string>
+    <string name="name">Input your name here</string>
+    <string name="first_name">Input your first name here</string>
+    <string name="last_name">Input your last name here</string>
+    <string name="email">Input your email here</string>
+    <string name="phone">Input your phone here</string>
+    <string name="password">Input your password here</string>
+    <string name="password_confirmation">Input password confirmation here</string>
+    <string name="users_list">Users List</string>
 
 </resources>

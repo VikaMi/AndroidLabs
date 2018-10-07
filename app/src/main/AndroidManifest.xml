@@ -17,6 +17,13 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".UserListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.PROCESS_TEXT"/>
+
+                <category android:name="android.intent.category.APP_BROWSER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
