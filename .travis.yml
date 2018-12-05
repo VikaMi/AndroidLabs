@@ -20,7 +20,8 @@ deploy:
   on:
     tags: false
     all_branches: true
-
+    
+sudo: false
 before_script:
   - echo yes | sdkmanager "build-tools;27.0.3"
   - chmod +x gradlew
